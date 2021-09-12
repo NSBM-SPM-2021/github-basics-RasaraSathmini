@@ -15,6 +15,17 @@ const ContactForm = (props) => {
 
   var [values, setValues] = useState(initialFieldValues);
 
+  useEffect(() => {
+    if(props.currentId == "")
+      setValues({
+        ...initialFieldValues
+      })
+      else
+      setValues({
+        ...props.contactObjects[props.currentId]
+      })
+  }, [props.currentId, props.contactObjects])
+
   const handleInputChange = (e) => {
     var { name, value } = e.target;
     setValues({
@@ -29,6 +40,7 @@ const ContactForm = (props) => {
   };
 
   return (
+      
     <form autoComplete="off" onSubmit={handleFormSubmit}>
       <div>
         <div className="form-group input-group">
@@ -151,13 +163,15 @@ const ContactForm = (props) => {
       <div className="form-group">
         <input
           type="submit"
-          value="Save"
+          value={props.currentId=='' ? "Save": "Update"} 
           className="btn btn-primary btn-block"
         />
       </div>
       
     </form>
+    
   );
+  
 };
 
 export default ContactForm;
