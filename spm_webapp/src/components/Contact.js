@@ -13,6 +13,8 @@ const Contacts = () => {
           setContactObjects({
             ...snapshot.val()
           })
+        else
+        setContactObjects({})
     })
   },[]) //similar to componentDidMount
 
@@ -37,6 +39,18 @@ const Contacts = () => {
                 setCurrentId('')
       })
   };
+
+const onDelete = key =>{
+  if(window.confirm('Are you sure to delete this student?')) {
+    firebaseDb.child(`contacts/${key}`).remove(
+      (err) => {
+          if (err) 
+              console.log(err)
+          else
+              setCurrentId('')
+    })
+  }
+}
 
   return (
     <>
@@ -85,7 +99,7 @@ const Contacts = () => {
                         <a className="btn text-primary" onClick={() => {setCurrentId(id)} }>
                           <i className="fas fa-pencil-alt"></i>
                         </a>
-                        <a className="btn text-danger">
+                        <a className="btn text-danger" onClick={() => {onDelete(id)} } >
                           <i className="fas fa-trash"></i>
                         </a>
                       </td>
