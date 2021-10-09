@@ -15,6 +15,17 @@ const ContactForm = (props) => {
 
   var [values, setValues] = useState(initialFieldValues);
 
+  useEffect(() => {
+    if(props.currentId == "")
+      setValues({
+        ...initialFieldValues
+      })
+      else
+      setValues({
+        ...props.contactObjects[props.currentId]
+      })
+  }, [props.currentId, props.contactObjects])
+
   const handleInputChange = (e) => {
     var { name, value } = e.target;
     setValues({
@@ -23,12 +34,37 @@ const ContactForm = (props) => {
     });
   };
 
+  const validate = ()=> {
+    if(values.nic.length != 10 && values.nic.length != 12) {    
+      alert("NIC is invalid");
+      return false;
+    }
+    if(values.mobile.length != 10){    
+      alert("Mobile number is invalid");
+      return false;
+    }
+    var re = /\S+@\S+\.\S+/;
+    if (!re.test(values.email)) {
+      alert("Invalid email");
+      return false;
+    }
+    if (values.gender == "unknown") {
+      alert("Select your gender");
+      return false; 
+    }
+    return true;
+  }
+     
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    props.addorEdit(values);
+    let isvalid = validate();
+    if (isvalid){
+      props.addorEdit(values);
+    } 
   };
 
   return (
+      
     <form autoComplete="off" onSubmit={handleFormSubmit}>
       <div>
         <div className="form-group input-group">
@@ -115,10 +151,14 @@ const ContactForm = (props) => {
               <i className="fas fa-mercury"></i>
             </div>
           </div>
-          <input
-            className="form-control" placeholder="Gender" name="gender" value={values.gender}
-            onChange={handleInputChange}
-          />
+
+          <select className="form-control" placeholder="Gender" name="gender" value={values.gender}
+            onChange={handleInputChange}>    
+            <option value="unknown">Gender</option> 
+            <option value="male">Male</option>            
+            <option value="female">Female</option>            
+          </select>
+
         </div>
       </div>
 
@@ -151,13 +191,15 @@ const ContactForm = (props) => {
       <div className="form-group">
         <input
           type="submit"
-          value="Save"
+          value={props.currentId=='' ? "Save": "Update"} 
           className="btn btn-primary btn-block"
         />
       </div>
       
     </form>
+    
   );
+  
 };
 
 export default ContactForm;
