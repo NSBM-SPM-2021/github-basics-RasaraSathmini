@@ -34,9 +34,33 @@ const ContactForm = (props) => {
     });
   };
 
+  const validate = ()=> {
+    if(values.nic.length != 10 && values.nic.length != 12) {    
+      alert("NIC is invalid");
+      return false;
+    }
+    if(values.mobile.length != 10){    
+      alert("Mobile number is invalid");
+      return false;
+    }
+    var re = /\S+@\S+\.\S+/;
+    if (!re.test(values.email)) {
+      alert("Invalid email");
+      return false;
+    }
+    if (values.gender == "unknown") {
+      alert("Select your gender");
+      return false; 
+    }
+    return true;
+  }
+     
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    props.addorEdit(values);
+    let isvalid = validate();
+    if (isvalid){
+      props.addorEdit(values);
+    } 
   };
 
   return (
@@ -127,10 +151,14 @@ const ContactForm = (props) => {
               <i className="fas fa-mercury"></i>
             </div>
           </div>
-          <input
-            className="form-control" placeholder="Gender" name="gender" value={values.gender}
-            onChange={handleInputChange}
-          />
+
+          <select className="form-control" placeholder="Gender" name="gender" value={values.gender}
+            onChange={handleInputChange}>    
+            <option value="unknown">Gender</option> 
+            <option value="male">Male</option>            
+            <option value="female">Female</option>            
+          </select>
+
         </div>
       </div>
 

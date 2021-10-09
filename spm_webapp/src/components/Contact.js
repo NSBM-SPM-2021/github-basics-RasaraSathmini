@@ -59,11 +59,11 @@ const onDelete = key =>{
           <h1 class="display-4 text-center"> Student Register </h1>
         </div>
       </div>
-      <div className="row">
-        <div className="col-md-5">
+      <div className="row justify-content-center" >
+        <div className="col-md-5" >
           <ContactForm {...({addorEdit, currentId, contactObjects}) }/>
         </div>
-        <div className="col-md-12">
+        <div className="col-md-12" >
 
           <table className = "table table-stripped">
         
