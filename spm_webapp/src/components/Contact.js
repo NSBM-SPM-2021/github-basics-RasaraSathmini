@@ -19,7 +19,7 @@ const Contacts = () => {
   },[]) //similar to componentDidMount
 
   const addorEdit = (obj) => {
-    if(currentId=='' )
+    if(currentId=== '' )
       firebaseDb.child("contacts").push(
         obj, 
         (err) => {
@@ -55,30 +55,37 @@ const onDelete = key =>{
   return (
     <>
       <div class="jumbotron jumbotron-fluid">
-        <div class="container">
+        <div class="container" style={{backgroundColor: "darkorange"}}>
           <h1 class="display-4 text-center"> Student Register </h1>
         </div>
       </div>
       <div className="row justify-content-center" >
-        <div className="col-md-5" >
+        <div className="col-md-5" style={{backgroundColor: "orange"}} >
           <ContactForm {...({addorEdit, currentId, contactObjects}) }/>
         </div>
-        <div className="col-md-12" >
+        
+        <text>
+          <br />
+          <br />
+          <br />
+        </text>
+
+        <div className="col-md-12" style={{backgroundColor: "white"}} >
 
           <table className = "table table-stripped">
         
             <thead className = "thead-light">
               <tr>
-                <th>Full Name</th>
-                <th>NIC</th>
-                <th>Mobile</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>DOB</th>
-                <th>Gender</th>
-                <th>Parent Name</th>
-                <th>Parent mobile</th>
-                <th>Action</th>
+                <th style={{backgroundColor: "yellow"}}> Full Name </th>
+                <th style={{backgroundColor: "yellow"}}> NIC </th>
+                <th style={{backgroundColor: "yellow"}}> Mobile </th>
+                <th style={{backgroundColor: "yellow"}}> Email </th>
+                <th style={{backgroundColor: "yellow"}}> Address </th>
+                <th style={{backgroundColor: "yellow"}}> DOB </th>
+                <th style={{backgroundColor: "yellow"}}> Gender </th>
+                <th style={{backgroundColor: "yellow"}}> Parent Name </th>
+                <th style={{backgroundColor: "yellow"}}> Parent mobile </th>
+                <th style={{backgroundColor: "yellow"}}> Action </th>
               </tr>
             </thead>
             <tbody>

@@ -16,7 +16,7 @@ const ContactForm = (props) => {
   var [values, setValues] = useState(initialFieldValues);
 
   useEffect(() => {
-    if(props.currentId == "")
+    if(props.currentId === "")
       setValues({
         ...initialFieldValues
       })
@@ -35,11 +35,11 @@ const ContactForm = (props) => {
   };
 
   const validate = ()=> {
-    if(values.nic.length != 10 && values.nic.length != 12) {    
+    if(values.nic.length !== 10 && values.nic.length !== 12) {    
       alert("NIC is invalid");
       return false;
     }
-    if(values.mobile.length != 10){    
+    if(values.mobile.length !== 10){    
       alert("Mobile number is invalid");
       return false;
     }
@@ -51,6 +51,10 @@ const ContactForm = (props) => {
     if (values.gender == "unknown") {
       alert("Select your gender");
       return false; 
+    }
+    if(values.parentMob.length !== 10){    
+      alert("Parents' Mobile number is invalid");
+      return false;
     }
     return true;
   }
@@ -154,7 +158,7 @@ const ContactForm = (props) => {
 
           <select className="form-control" placeholder="Gender" name="gender" value={values.gender}
             onChange={handleInputChange}>    
-            <option value="unknown">Gender</option> 
+            <option value="unknown"> Gender </option> 
             <option value="male">Male</option>            
             <option value="female">Female</option>            
           </select>
@@ -191,7 +195,7 @@ const ContactForm = (props) => {
       <div className="form-group">
         <input
           type="submit"
-          value={props.currentId=='' ? "Save": "Update"} 
+          value={props.currentId ==='' ? "Save": "Update"} 
           className="btn btn-primary btn-block"
         />
       </div>
