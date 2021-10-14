@@ -24,6 +24,7 @@ const ContactForm = (props) => {
       setValues({
         ...props.contactObjects[props.currentId]
       })
+      // eslint-disable-next-line
   }, [props.currentId, props.contactObjects])
 
   const handleInputChange = (e) => {
@@ -48,7 +49,7 @@ const ContactForm = (props) => {
       alert("Invalid email");
       return false;
     }
-    if (values.gender == "unknown") {
+    if (values.gender.value === "unknown") {
       alert("Select your gender");
       return false; 
     }

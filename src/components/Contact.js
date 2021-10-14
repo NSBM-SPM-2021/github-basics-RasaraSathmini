@@ -103,10 +103,10 @@ const onDelete = key =>{
                       <td>{contactObjects[id].parentMob}</td>
                       
                       <td>
-                        <a className="btn text-primary" onClick={() => {setCurrentId(id)} }>
+                        <a href="!#" className="btn text-primary" onClick={() => {setCurrentId(id)} }>
                           <i className="fas fa-pencil-alt"></i>
                         </a>
-                        <a className="btn text-danger" onClick={() => {onDelete(id)} } >
+                        <a href="!#" className="btn text-danger" onClick={() => {onDelete(id)} } >
                           <i className="fas fa-trash"></i>
                         </a>
                       </td>
